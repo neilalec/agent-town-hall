@@ -1,52 +1,45 @@
 # Agent Town Hall release record
 
-## v0.1.0 — published
+## v0.1.0 - published
 
-- Package: [`agent-town-hall` on PyPI](https://pypi.org/project/agent-town-hall/)
-- GitHub: [source](https://github.com/neilalec/agent-town-hall), [release](https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.0)
-- Version/tag: `0.1.0` / `v0.1.0`
-- Release source commit: `6115353c82a6dfc7881c29d4be26257df9471ea1`
-- CLI: `agent-chat`; Python import: `agent_chat`; licence: MIT
-- Copyright (c) 2026 Neil Massella
+- PyPI: https://pypi.org/project/agent-town-hall/0.1.0/
+- GitHub: https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.0
+- Source commit: `6115353c82a6dfc7881c29d4be26257df9471ea1`
+- GitHub Actions OIDC publication run: [44098168860](https://github.com/neilalec/agent-town-hall/actions/runs/44098168860)
+- Both distributions on PyPI match the reviewed GitHub release hashes; see the
+  v0.1.0 section in [docs/PYPI_PUBLISHING.md](docs/PYPI_PUBLISHING.md).
 
-The GitHub release and PyPI project contain the same reviewed wheel and source
-archive. Publication used GitHub Actions OIDC Trusted Publishing; no PyPI API token
-is stored in the repository. The publishing workflow run is
-[44098168860](https://github.com/neilalec/agent-town-hall/actions/runs/44098168860).
-The release source and publishing-controls commit each passed all nine
-Windows/macOS/Linux Python 3.10/3.12/3.14 CI jobs (18 jobs total).
+Do not move the v0.1.0 tag or rebuild/replace its wheel, sdist or checksums.
 
-The initial availability snapshot in [NAME_AVAILABILITY.json](NAME_AVAILABILITY.json)
-records pre-publication 404 responses; it is historical and does not describe current
-availability.
+## v0.1.1 - GitHub release published; PyPI approval pending
 
-## Frozen v0.1.0 artifacts
+This documentation-only release improves the README introduction, installation guide
+and live agent-conversation example. No messaging or feed behavior changed.
 
-Do not rebuild or replace the published v0.1.0 distributions, move its tag, or
-regenerate its release checksums. The published SHA-256 values are:
+- GitHub release: https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.1
+- Source commit: `3200ea5d2bcb0379b610fcceafb2ae03ad9bfc57`
+- Annotated tag object: `eb33a29e79f9aaf68a5dc2484683b6bdee1231a1`
+- Release ID: `448797163`
+- Main CI: [all nine jobs passed](https://github.com/neilalec/agent-town-hall/actions/runs/44110127756)
+- Tag CI: [all nine jobs passed](https://github.com/neilalec/agent-town-hall/actions/runs/44110595435)
+- PyPI still lists v0.1.0. The v0.1.1 OIDC upload has not been triggered and awaits
+  explicit owner approval.
+
+The GitHub release includes these distributions and their SHA256SUMS manifest:
 
 ```text
-58ea87ac88ec2be89ed952df0fc12206aae1aab6dfda2ff39516203647c55c55  agent_town_hall-0.1.0-py3-none-any.whl
-ee3a80e91b824b3355d94190a841330949fd2797e5432f9b5891cd8ff77c4127  agent_town_hall-0.1.0.tar.gz
+f1053654ab6aa9f2590ea9f11aefc1aa7a6dc1d149e4d78475b3de2d4734f9ec  agent_town_hall-0.1.1-py3-none-any.whl
+f62788f26932211755494560f3158aabd9fc47028608a12049c06b4c4e9bd15f  agent_town_hall-0.1.1.tar.gz
 ```
 
-The uploaded PyPI files were checked against the GitHub release hashes. The GitHub
-release also includes `SHA256SUMS` for download verification.
+See [GITHUB_RELEASE_v0.1.1.md](GITHUB_RELEASE_v0.1.1.md) and the
+[Trusted Publishing record](docs/PYPI_PUBLISHING.md).
 
 ## Future releases
 
-The v0.1.0 publishing workflow is deliberately pinned to that release and has no
-automatic trigger. A future release needs a reviewed version bump, new release
-artifacts and checksums, an updated fail-closed verifier/workflow, passing CI, and an
-explicitly approved manual publication. Do not treat a push, tag or GitHub release as
-authorization to publish to PyPI. See [the Trusted Publishing record](docs/PYPI_PUBLISHING.md).
+The current OIDC workflow is manually gated and pinned to v0.1.1. Any future version
+requires a reviewed version bump, new artifacts and hashes, updated verifier/workflow,
+passing CI, and explicit publication approval. Pushes, tags and GitHub releases never
+publish automatically.
 
-Local development checks are described in [RELEASE_VALIDATION.md](RELEASE_VALIDATION.md).
-
-## v0.1.1 — GitHub release candidate
-
-This patch updates the README and release documentation so the PyPI description will
-show the improved installation guide and live conversation example. No messaging or
-feed behavior changed. GitHub source/release publication and PyPI publication are
-separate; the latter remains gated by explicit owner approval. See
-[GITHUB_RELEASE_v0.1.1.md](GITHUB_RELEASE_v0.1.1.md).
+Local test and release verification details are in [RELEASE_VALIDATION.md](RELEASE_VALIDATION.md).

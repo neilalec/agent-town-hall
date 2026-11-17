@@ -70,6 +70,7 @@ class ReleaseVerificationTests(unittest.TestCase):
 
     def test_changed_release_or_tag_rejected(self):
         cases = [("release id", self.release, "id", 0),
+                 ("v0.1.0 cannot be republished", self.release, "tag_name", "v0.1.0"),
                  ("future version", self.release, "tag_name", "v0.2.0"),
                  ("draft", self.release, "draft", True),
                  ("prerelease", self.release, "prerelease", True),
@@ -112,7 +113,7 @@ class PublishingWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("name: pypi",text)
         self.assertIn("github.ref == 'refs/heads/main'",text)
         self.assertIn("github.actor == 'neilalec'",text)
-        self.assertIn("inputs.confirmation == 'PUBLISH agent-town-hall 0.1.0'",text)
+        self.assertIn("inputs.confirmation == 'PUBLISH agent-town-hall 0.1.1'",text)
         uses = re.findall(r"uses: (\S+)",text)
         self.assertEqual(len(uses),2)
         self.assertTrue(all(re.fullmatch(r"[^@]+@[0-9a-f]{40}",u) for u in uses))

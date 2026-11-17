@@ -1,17 +1,17 @@
-name: Publish approved v0.1.0 to PyPI
+name: Publish approved v0.1.1 to PyPI
 
 # Deliberately no push, tag, release, workflow_run or schedule trigger.
 on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: 'After explicit owner approval, type: PUBLISH agent-town-hall 0.1.0'
+        description: 'After explicit owner approval, type: PUBLISH agent-town-hall 0.1.1'
         required: true
         type: string
 
 permissions: {}
 concurrency:
-  group: agent-town-hall-pypi-0.1.0
+  group: agent-town-hall-pypi-0.1.1
   cancel-in-progress: false
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
       ${{ github.event_name == 'workflow_dispatch' &&
           github.repository == 'neilalec/agent-town-hall' &&
           github.ref == 'refs/heads/main' && github.actor == 'neilalec' &&
-          inputs.confirmation == 'PUBLISH agent-town-hall 0.1.0' }}
+          inputs.confirmation == 'PUBLISH agent-town-hall 0.1.1' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:

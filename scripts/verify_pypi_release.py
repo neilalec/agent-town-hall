@@ -1,4 +1,4 @@
-"""Verify and stage only the approved GitHub v0.1.0 assets; never build or upload."""
+"""Verify and stage only the approved GitHub v0.1.1 assets; never build or upload."""
 import argparse
 import hashlib
 import json
@@ -7,22 +7,22 @@ import shutil
 import subprocess
 
 REPOSITORY = "neilalec/agent-town-hall"
-TAG = "v0.1.0"
-COMMIT = "6115353c82a6dfc7881c29d4be26257df9471ea1"
-TAG_OBJECT = "efad8be28e0a9eb9d1cdbf1f9b7b7c88a76d720c"
-RELEASE_ID = 448680974
+TAG = "v0.1.1"
+COMMIT = "3200ea5d2bcb0379b610fcceafb2ae03ad9bfc57"
+TAG_OBJECT = "eb33a29e79f9aaf68a5dc2484683b6bdee1231a1"
+RELEASE_ID = 448797163
 FILES = {
-    "agent_town_hall-0.1.0-py3-none-any.whl": {
-        "sha256": "58ea87ac88ec2be89ed952df0fc12206aae1aab6dfda2ff39516203647c55c55",
-        "id": 759208454, "size": 12000,
+    "agent_town_hall-0.1.1-py3-none-any.whl": {
+        "sha256": "f1053654ab6aa9f2590ea9f11aefc1aa7a6dc1d149e4d78475b3de2d4734f9ec",
+        "id": 759513338, "size": 12301,
     },
-    "agent_town_hall-0.1.0.tar.gz": {
-        "sha256": "ee3a80e91b824b3355d94190a841330949fd2797e5432f9b5891cd8ff77c4127",
-        "id": 759208453, "size": 26031,
+    "agent_town_hall-0.1.1.tar.gz": {
+        "sha256": "f62788f26932211755494560f3158aabd9fc47028608a12049c06b4c4e9bd15f",
+        "id": 759513336, "size": 30628,
     },
     "SHA256SUMS": {
-        "sha256": "c3f2c37654767e1395cab89385b80a6a3b23f2d241818311021c592129b3a717",
-        "id": 759208452, "size": 200,
+        "sha256": "07cfc44459d8d750798c9120c70930f4fcf03c4f9f1794302f9f0aabfee28bb4",
+        "id": 759513337, "size": 200,
     },
 }
 
@@ -34,7 +34,7 @@ def require(condition, message):
 
 def validate_metadata(release, tag_ref, tag_object):
     require(release.get("id") == RELEASE_ID and release.get("tag_name") == TAG,
-            "Release identity differs from the approved v0.1.0 release")
+            "Release identity differs from the approved v0.1.1 release")
     require(release.get("html_url") == f"https://github.com/{REPOSITORY}/releases/tag/{TAG}",
             "Unexpected release URL")
     require(release.get("draft") is False and release.get("prerelease") is False,
