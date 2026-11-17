@@ -334,7 +334,7 @@ def main(argv=None):
         return 0
     except BrokenPipeError:
         return 0
-    except (ChatError, OSError, sqlite3.Error) as exc:
+    except (ChatError, OSError, UnicodeError, sqlite3.Error) as exc:
         print(json.dumps({'ok': False, 'error': type(exc).__name__, 'message': str(exc)}, ensure_ascii=False))
         return 3 if isinstance(exc, sqlite3.OperationalError) else 2
     except KeyboardInterrupt:

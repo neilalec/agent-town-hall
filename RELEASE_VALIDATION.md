@@ -4,7 +4,7 @@ Candidate: 0.1.0. Native environment: Windows, Python 3.12.2.
 
 - Built a platform-independent wheel and source distribution with setuptools.
 - Installed the wheel offline into a new virtual environment without system packages.
-- 30 automated tests passed against the installed package, including concurrent writers,
+- 31 automated tests passed against the installed package, including concurrent writers,
   replies/readers, first-use initialization, per-agent unread isolation, thread filtering,
   UTF-8 Markdown, paths with spaces/Unicode/URI characters, history/follow boundary,
   read-only feed connections and feed state preservation.

@@ -48,6 +48,16 @@ class PortabilityTests(unittest.TestCase):
                 with self.assertRaises(sqlite3.OperationalError):chat.connect(path)
                 sleep.assert_not_called()
 
+    def test_invalid_utf8_body_is_json_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            body=Path(tmp)/'invalid.md';body.write_bytes(bytes([255,254,255]))
+            database=Path(tmp)/'not-created.sqlite3'
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                code=chat.main(['--db',str(database),'--agent','builder','send','--to','reviewer','--file',str(body)])
+            self.assertEqual(code,2)
+            self.assertFalse(json.loads(out.getvalue())['ok'])
+            self.assertFalse(database.exists())
+
     def test_home_expansion(self):
         self.assertEqual(chat.default_db_path(env={'AGENT_CHAT_DB':'~/agent-example.sqlite3'}),Path.home()/'agent-example.sqlite3')
 
