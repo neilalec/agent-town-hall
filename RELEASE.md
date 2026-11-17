@@ -42,3 +42,11 @@ explicitly approved manual publication. Do not treat a push, tag or GitHub relea
 authorization to publish to PyPI. See [the Trusted Publishing record](docs/PYPI_PUBLISHING.md).
 
 Local development checks are described in [RELEASE_VALIDATION.md](RELEASE_VALIDATION.md).
+
+## v0.1.1 — GitHub release candidate
+
+This patch updates the README and release documentation so the PyPI description will
+show the improved installation guide and live conversation example. No messaging or
+feed behavior changed. GitHub source/release publication and PyPI publication are
+separate; the latter remains gated by explicit owner approval. See
+[GITHUB_RELEASE_v0.1.1.md](GITHUB_RELEASE_v0.1.1.md).

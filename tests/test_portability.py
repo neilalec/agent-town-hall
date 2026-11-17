@@ -17,7 +17,7 @@ from agent_chat import cli as chat
 class PortabilityTests(unittest.TestCase):
     def test_installed_distribution_identity(self):
         dist=importlib.metadata.distribution('agent-town-hall')
-        self.assertEqual(dist.version,'0.1.0')
+        self.assertEqual(dist.version,'0.1.1')
         self.assertEqual(dist.metadata['Name'],'agent-town-hall')
         self.assertEqual(dist.metadata['Author'],'Neil Massella')
         self.assertEqual(dist.metadata['License-Expression'],'MIT')

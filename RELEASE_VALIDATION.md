@@ -44,3 +44,13 @@ matrix; the resulting 18 successful jobs are linked from [RELEASE.md](RELEASE.md
 The v0.1.0 distribution is published on PyPI through OIDC Trusted Publishing; see
 [the publication record](docs/PYPI_PUBLISHING.md). Future releases still require an
 explicitly reviewed and approved manual publication.
+
+## v0.1.1 documentation-only candidate
+
+The candidate changes the package version and CLI version string to `0.1.1`, while
+leaving messaging, SQLite schema, feed and other runtime behavior unchanged. On Windows
+with Python 3.12, a preflight wheel and source archive were built into the ignored
+`build/v0.1.1-preflight/` run folder. The wheel was installed in a fresh virtual
+environment; all 44 tests passed and `agent-chat --version` reported `0.1.1`. Final
+release artifacts are built again from the clean tagged source after its commit passes
+CI; the preflight files are not release inputs.

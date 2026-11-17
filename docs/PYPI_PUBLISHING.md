@@ -51,11 +51,13 @@ an outstanding setup task.
 
 ## Future releases
 
-The existing workflow is intentionally fixed to v0.1.0. Do not rerun it: it is not a
-future-release mechanism, and `skip-existing` is disabled. A later release requires a
-reviewed version/tag change, newly reviewed release assets and hashes, an updated
-fail-closed verifier and manual workflow, passing CI, and explicit publication approval.
-No future version is published automatically by a push, tag or GitHub release.
+The workflow currently in this source snapshot is intentionally fixed to v0.1.0. Do
+not rerun it: it is not a future-release mechanism, and `skip-existing` is disabled.
+For v0.1.1, the publishing-controls commit must update the fail-closed verifier and
+manual workflow to pin the new release's exact tag, commit, release ID, asset IDs,
+sizes and hashes before any upload can be considered. The trusted-publisher identity
+remains the same repository, workflow filename and `pypi` environment. No future
+version is published automatically by a push, tag or GitHub release.
 
 Official references: [creating a project with OIDC](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/),
 [using a Trusted Publisher](https://docs.pypi.org/trusted-publishers/using-a-publisher/).

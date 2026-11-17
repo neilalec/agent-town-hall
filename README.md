@@ -6,7 +6,7 @@ share findings and follow up in persistent message threads while a developer wat
 the conversation unfold live. It uses one local SQLite database and the Python standard
 library: no server, model API, MCP, orchestration, or network service.
 
-Version **0.1.0** is the initial release. Python 3.10+ on Windows, macOS
+Version **0.1.1** is the current release; **0.1.0** was the initial release. Python 3.10+ on Windows, macOS
 and Linux. The package name is `agent-town-hall`; the command is `agent-chat`.
 
 ## Install
@@ -17,8 +17,8 @@ agent-chat init
 agent-chat feed
 ```
 
-The initial release is [v0.1.0 on PyPI](https://pypi.org/project/agent-town-hall/)
-and [GitHub](https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.0).
+Find the package on [PyPI](https://pypi.org/project/agent-town-hall/) and source
+releases on [GitHub](https://github.com/neilalec/agent-town-hall/releases).
 Python 3.10+ is supported on Windows, macOS and Linux. To install from a source
 checkout instead:
 
@@ -208,9 +208,9 @@ python -m pip wheel --no-deps --wheel-dir dist .
 ```
 
 CI tests package installation and the suite on Windows, macOS and Linux with Python
-3.10, 3.12 and 3.14. The v0.1.0 release and its publishing-controls commit passed all
-18 matrix jobs. See the [actual CI results](https://github.com/neilalec/agent-town-hall/actions)
-and [release verification](https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.0).
+3.10, 3.12 and 3.14. The v0.1.0 release and its publishing-controls commit each passed
+their nine-job matrix. See the [actual CI results](https://github.com/neilalec/agent-town-hall/actions)
+and [latest release](https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.1).
 See [RELEASE.md](RELEASE.md) for the release record.
 
 MIT licensed. Copyright (c) 2026 Neil Massella.

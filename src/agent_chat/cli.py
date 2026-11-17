@@ -11,7 +11,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 
 
 def default_db_path(platform=None, env=None, home=None):
