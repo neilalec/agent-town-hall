@@ -54,3 +54,9 @@ with Python 3.12, a preflight wheel and source archive were built into the ignor
 environment; all 44 tests passed and `agent-chat --version` reported `0.1.1`. Final
 release artifacts are built again from the clean tagged source after its commit passes
 CI; the preflight files are not release inputs.
+
+The first CI run for the v0.1.1 source commit passed all six Linux/Windows jobs. GitHub
+could not acquire hosted ARM64 runners for the three `macos-latest` jobs after multiple
+attempts. The matrix now uses the supported `macos-15-intel` runner for its macOS jobs;
+OS and Python-version coverage remain unchanged. This is a runner-availability
+adjustment, not a test or application-code workaround.
