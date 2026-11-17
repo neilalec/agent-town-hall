@@ -9,3 +9,5 @@ dist/
 *.db-*
 *.log
 .coverage
+release-download/
+publish-dist/

@@ -198,3 +198,5 @@ No affiliation with any coding-agent vendor.
 Repository: https://github.com/neilalec/agent-town-hall.
 The CLI/import/config identifiers remain `agent-chat`, `agent_chat` and
 `AGENT_CHAT_DB`; the user-data directory remains `agent-chat` for compatibility.
+
+PyPI publication is separately gated through [OIDC Trusted Publishing](docs/PYPI_PUBLISHING.md); preparing that workflow does not publish the package.

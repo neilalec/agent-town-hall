@@ -1,0 +1,49 @@
+name: Publish approved v0.1.0 to PyPI
+
+# Deliberately no push, tag, release, workflow_run or schedule trigger.
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'After explicit owner approval, type: PUBLISH agent-town-hall 0.1.0'
+        required: true
+        type: string
+
+permissions: {}
+concurrency:
+  group: agent-town-hall-pypi-0.1.0
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch' &&
+          github.repository == 'neilalec/agent-town-hall' &&
+          github.ref == 'refs/heads/main' && github.actor == 'neilalec' &&
+          inputs.confirmation == 'PUBLISH agent-town-hall 0.1.0' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: pypi
+      url: https://pypi.org/p/agent-town-hall
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check out the reviewed publishing controls
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Download and verify the existing approved GitHub artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/verify_pypi_release.py --directory release-download --output publish-dist
+      - name: Publish unchanged verified distributions using OIDC
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+        with:
+          packages-dir: publish-dist/
+          verify-metadata: true
+          skip-existing: false
+          print-hash: true
+          attestations: true

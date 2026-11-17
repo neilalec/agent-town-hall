@@ -36,3 +36,5 @@ a package on PyPI.
 
 Local verification: RELEASE_VALIDATION.md. Existing private installations and
 inboxes are outside this project and must not be used as release fixtures.
+
+Trusted Publishing preparation and exact owner setup: [docs/PYPI_PUBLISHING.md](docs/PYPI_PUBLISHING.md). The manual upload workflow is prepared but must not be dispatched before separate PyPI approval.
