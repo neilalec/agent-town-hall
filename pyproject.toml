@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "terminal-agent-chat"
+version = "0.1.0"
+description = "Lightweight local SQLite messaging for independently running coding agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Communications :: Chat",
+]
+dependencies = []
+
+[project.scripts]
+agent-chat = "agent_chat.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
