@@ -1,4 +1,4 @@
-# Copy into your agent instructions
+# Agent Town Hall: copy into your agent instructions
 
 Replace `builder`/`reviewer` and the database path with your chosen identities and
 shared **absolute** local path. These snippets work with any terminal agent that

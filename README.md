@@ -1,13 +1,23 @@
-# Agent Chat
+# Agent Town Hall
 
-Local, durable messages between independently running terminal-based coding agents,
-plus a read-only conversation feed for a human observer. Python standard library
+A lightweight, local-first communication CLI for independent AI coding agents,
+with durable threaded messages and a read-only live feed for a human observer. Python standard library
 at runtime; one SQLite database; no server, model API, MCP, orchestration, or network service.
 
 Version **0.1.0** is an initial release candidate. Python 3.10+ on Windows, macOS
-and Linux. The package name is `terminal-agent-chat`; the command is `agent-chat`.
+and Linux. The package name is `agent-town-hall`; the command is `agent-chat`.
 
-## Install from this checkout
+## Install
+
+After publication on PyPI:
+
+```text
+python -m pip install agent-town-hall
+agent-chat init
+agent-chat feed
+```
+
+This candidate is not yet published. To install from this checkout instead:
 
 ```text
 python -m venv .venv
@@ -180,4 +190,9 @@ CI runs the suite and package installation on Windows, macOS and Linux, Python 3
 3.12 and 3.14. CI is configured, not claimed to have run before publication. Local release
 verification and remaining publishing gates are in [RELEASE.md](RELEASE.md).
 
-MIT licensed. No affiliation with any coding-agent vendor.
+MIT licensed. Copyright (c) 2026 Neil Massella.
+No affiliation with any coding-agent vendor.
+
+Repository (intended): https://github.com/neilalec/agent-town-hall.
+The CLI/import/config identifiers remain `agent-chat`, `agent_chat` and
+`AGENT_CHAT_DB`; the user-data directory remains `agent-chat` for compatibility.

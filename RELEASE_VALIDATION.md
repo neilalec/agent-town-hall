@@ -1,10 +1,11 @@
 # Local release verification
 
+Project: Agent Town Hall (`agent-town-hall`, command `agent-chat`).
 Candidate: 0.1.0. Native environment: Windows, Python 3.12.2.
 
 - Built a platform-independent wheel and source distribution with setuptools.
 - Installed the wheel offline into a new virtual environment without system packages.
-- 31 automated tests passed against the installed package, including concurrent writers,
+- 33 automated tests passed against the installed package, including concurrent writers,
   replies/readers, first-use initialization, per-agent unread isolation, thread filtering,
   UTF-8 Markdown, paths with spaces/Unicode/URI characters, history/follow boundary,
   read-only feed connections and feed state preservation.
@@ -21,5 +22,10 @@ retries of SQLite BUSY/LOCKED errors during connection/schema setup only. Messag
 are never replayed; transaction atomicity and ID ordering remain unchanged. Non-lock
 errors are not retried. Human feed escapes terminal control characters without modifying
 stored content.
+
+Public identity, entry point, repository URL, MIT copyright and feed branding are
+covered by tests. Read-only name checks and their limits are recorded in
+NAME_AVAILABILITY.json. Intended private vulnerability reporting setup is documented
+in SECURITY.md; no remote setting has been changed.
 
 See RELEASE.md for approval gates. Nothing has been uploaded or published.

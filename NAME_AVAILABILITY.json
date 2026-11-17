@@ -1,0 +1,16 @@
+{
+  "checked_at_utc": "2026-11-17T12:59:19.079540+00:00",
+  "github": {
+    "repository": "neilalec/agent-town-hall",
+    "authenticated_account": "neilalec",
+    "http_status": 404,
+    "result": "No repository found in authenticated owner lookup; no creation attempted"
+  },
+  "pypi": {
+    "project": "agent-town-hall",
+    "project_json_http_status": 404,
+    "simple_index_http_status": 404,
+    "result": "No project found; registration not attempted"
+  },
+  "caveat": "No conflict observed; availability is not reserved or guaranteed until approved creation/registration."
+}

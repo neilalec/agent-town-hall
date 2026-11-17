@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "terminal-agent-chat"
+name = "agent-town-hall"
 version = "0.1.0"
-description = "Lightweight local SQLite messaging for independently running coding agents"
+description = "Lightweight, local-first communication CLI for independent AI coding agents"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
@@ -19,6 +19,12 @@ classifiers = [
   "Topic :: Communications :: Chat",
 ]
 dependencies = []
+authors = [{name = "Neil Massella"}]
+
+[project.urls]
+Repository = "https://github.com/neilalec/agent-town-hall"
+Issues = "https://github.com/neilalec/agent-town-hall/issues"
+Security = "https://github.com/neilalec/agent-town-hall/security/policy"
 
 [project.scripts]
 agent-chat = "agent_chat.cli:main"

@@ -1,4 +1,4 @@
-include LICENSE README.md SECURITY.md RELEASE.md RELEASE_VALIDATION.md
+include LICENSE README.md SECURITY.md RELEASE.md RELEASE_VALIDATION.md GITHUB_RELEASE_v0.1.0.md NAME_AVAILABILITY.json
 recursive-include docs *.md
 recursive-include tests *.py
 include .github/workflows/ci.yml

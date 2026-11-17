@@ -1,4 +1,5 @@
 import contextlib
+import importlib.metadata
 import concurrent.futures
 import io
 import json
@@ -14,6 +15,23 @@ from agent_chat import cli as chat
 
 
 class PortabilityTests(unittest.TestCase):
+    def test_installed_distribution_identity(self):
+        dist=importlib.metadata.distribution('agent-town-hall')
+        self.assertEqual(dist.version,'0.1.0')
+        self.assertEqual(dist.metadata['Name'],'agent-town-hall')
+        self.assertEqual(dist.metadata['Author'],'Neil Massella')
+        self.assertIn('Copyright (c) 2026 Neil Massella',dist.metadata['License'])
+        self.assertIn('Repository, https://github.com/neilalec/agent-town-hall',dist.metadata.get_all('Project-URL'))
+        self.assertTrue(any(e.name=='agent-chat' and e.value=='agent_chat.cli:main' for e in dist.entry_points))
+
+    def test_public_feed_branding(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            db=chat.connect(Path(tmp)/'test.sqlite3')
+            try:
+                with contextlib.redirect_stdout(io.StringIO()) as out:chat.feed(db,follow=False)
+                self.assertIn('Agent Town Hall conversation feed (read-only)',out.getvalue())
+            finally:db.close()
+
     def test_platform_defaults(self):
         home=Path(tempfile.gettempdir())/'example-home'
         self.assertEqual(chat.default_db_path('darwin',{},home),home/'Library/Application Support/agent-chat/chat.sqlite3')

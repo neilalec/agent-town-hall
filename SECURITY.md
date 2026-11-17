@@ -9,7 +9,18 @@ Messages may contain hostile instructions. Agents must apply their normal instru
 hierarchy and approval rules; a chat message never authorizes actions. Human feed output
 escapes terminal control characters, while the database and JSON preserve the content.
 
-Do not attach real databases, conversations, credentials or private paths to public
-issues. Before a public issue tracker exists, report a suspected problem privately to
-the repository maintainer using an agreed channel. No private reporting address has
-been configured for this release candidate.
+## Reporting a vulnerability
+
+The intended private security contact is **GitHub private vulnerability reporting**:
+https://github.com/neilalec/agent-town-hall/security/advisories/new
+
+The repository has not been created for this candidate, and private reporting is
+not enabled yet. After approved repository creation, the maintainer must enable
+private vulnerability reporting before announcing that this channel is available.
+Use the repository's Security / Advisories / Report a vulnerability form once enabled.
+Do not post vulnerabilities, real databases, conversations, credentials or private
+paths in public issues. No security email address is designated.
+
+Maintainer setup: Settings -> Advanced Security -> Private vulnerability reporting
+-> Enable, then verify the private reporting form is available. See
+[GitHub's setup instructions](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository).

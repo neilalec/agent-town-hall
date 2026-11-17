@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local, durable CLI inboxes. No model API, network service or server."""
+"""Agent Town Hall: local-first communication for independent AI coding agents."""
 import argparse
 import json
 import os
@@ -220,7 +220,7 @@ def feed(db, history=50, thread=None, follow=True, interval=1):
         raise ChatError('history must be 0..10000; interval must be 0.1..30 seconds')
     try:
         rows, after = feed_history(db, history, thread)
-        print('Agent Chat conversation feed (read-only)' +
+        print('Agent Town Hall conversation feed (read-only)' +
               (f' | thread {thread}' if thread is not None else ' | all threads'), flush=True)
         for row in rows:
             print_feed_message(row)
