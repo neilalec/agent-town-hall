@@ -5,12 +5,13 @@ Candidate: 0.1.0. Native environment: Windows, Python 3.12.2.
 
 - Built a platform-independent wheel and source distribution with setuptools.
 - Installed the wheel offline into a new virtual environment without system packages.
-- 33 automated tests passed against the installed package, including concurrent writers,
+- 36 automated tests passed against the installed package, including concurrent writers,
   replies/readers, first-use initialization, per-agent unread isolation, thread filtering,
   UTF-8 Markdown, paths with spaces/Unicode/URI characters, history/follow boundary,
   read-only feed connections and feed state preservation.
 - Windows/macOS/Linux default-path selection was tested using injected environments.
-  Native macOS/Linux and other Python versions are **not yet verified**; CI is configured.
+  Native OS/Python results are available in GitHub Actions; release publication requires
+  all nine matrix jobs to pass, not just local or mocked-platform tests.
 - Installed console command version/help and a synthetic live feed round trip checked locally.
   This is a CLI/package test, not a new live model-agent integration claim.
 - Existing private tool and database were not used for tests or copied into this project.
@@ -25,7 +26,18 @@ stored content.
 
 Public identity, entry point, repository URL, MIT copyright and feed branding are
 covered by tests. Read-only name checks and their limits are recorded in
-NAME_AVAILABILITY.json. Intended private vulnerability reporting setup is documented
-in SECURITY.md; no remote setting has been changed.
+NAME_AVAILABILITY.json. GitHub private vulnerability reporting is enabled and documented
+in SECURITY.md.
 
-See RELEASE.md for approval gates. Nothing has been uploaded or published.
+The initial CI run exposed extra watch queries after early timed-wait returns on
+Windows/Python 3.10 (six polls, maximum four permitted). The loop now waits until
+the next scheduled poll and avoids a final query at timeout. The original real-clock
+poll-count limit is unchanged. Deterministic tests cover early wakes, oversleep,
+zero timeout, and absence of a held database transaction during waits.
+
+Setuptools uses SPDX `license = "MIT"` and `license-files` (backend >=77.0.3),
+without deprecated license classifiers/tables. Installed metadata/license tests pass.
+
+Source is public on GitHub. All nine jobs must pass on the final commit before the
+v0.1.0 tag/release is published. The final verification link belongs in the release
+notes. PyPI publication remains separately gated; see RELEASE.md.

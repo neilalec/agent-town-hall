@@ -11,13 +11,11 @@ escapes terminal control characters, while the database and JSON preserve the co
 
 ## Reporting a vulnerability
 
-The intended private security contact is **GitHub private vulnerability reporting**:
+The private security contact is **GitHub private vulnerability reporting**:
 https://github.com/neilalec/agent-town-hall/security/advisories/new
 
-The repository has not been created for this candidate, and private reporting is
-not enabled yet. After approved repository creation, the maintainer must enable
-private vulnerability reporting before announcing that this channel is available.
-Use the repository's Security / Advisories / Report a vulnerability form once enabled.
+Private vulnerability reporting is enabled for this public repository.
+Use the repository's Security / Advisories / Report a vulnerability form.
 Do not post vulnerabilities, real databases, conversations, credentials or private
 paths in public issues. No security email address is designated.
 

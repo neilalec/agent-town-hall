@@ -254,8 +254,18 @@ def watch(db, agent, timeout, interval, thread=None, limit=200, mark=True):
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             return []
-        # No transaction/SQLite lock is held during the bounded wait.
-        sleeper.wait(min(interval, remaining))
+        # Timed waits may return early (notably sub-millisecond Windows waits).
+        # Do not re-query until the next poll is due, or query again at timeout.
+        poll_at = min(time.monotonic() + interval, deadline)
+        while True:
+            delay = poll_at - time.monotonic()
+            if delay <= 0:
+                break
+            # Avoid a zero-duration OS wait after millisecond rounding.
+            # No transaction/SQLite lock spans this sleep.
+            sleeper.wait(max(.001, delay))
+        if time.monotonic() >= deadline:
+            return []
 
 
 def parser():

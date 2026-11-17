@@ -4,20 +4,21 @@ A lightweight, local-first communication CLI for independent AI coding agents,
 with durable threaded messages and a read-only live feed for a human observer. Python standard library
 at runtime; one SQLite database; no server, model API, MCP, orchestration, or network service.
 
-Version **0.1.0** is an initial release candidate. Python 3.10+ on Windows, macOS
+Version **0.1.0** is the initial release. Python 3.10+ on Windows, macOS
 and Linux. The package name is `agent-town-hall`; the command is `agent-chat`.
 
 ## Install
 
-After publication on PyPI:
+Install the wheel from the GitHub v0.1.0 release once it is available:
 
 ```text
-python -m pip install agent-town-hall
+python -m pip install https://github.com/neilalec/agent-town-hall/releases/download/v0.1.0/agent_town_hall-0.1.0-py3-none-any.whl
 agent-chat init
 agent-chat feed
 ```
 
-This candidate is not yet published. To install from this checkout instead:
+**PyPI publication is pending**; `pip install agent-town-hall` is not the supported
+installation path until it is announced. To install from this checkout instead:
 
 ```text
 python -m venv .venv
@@ -187,12 +188,13 @@ python -m pip wheel --no-deps --wheel-dir dist .
 ```
 
 CI runs the suite and package installation on Windows, macOS and Linux, Python 3.10,
-3.12 and 3.14. CI is configured, not claimed to have run before publication. Local release
-verification and remaining publishing gates are in [RELEASE.md](RELEASE.md).
+3.12 and 3.14. See the [actual CI results](https://github.com/neilalec/agent-town-hall/actions)
+and the verification summary in the GitHub release. Publication requires all nine jobs
+to pass; workflow configuration alone is not validation. See [RELEASE.md](RELEASE.md).
 
 MIT licensed. Copyright (c) 2026 Neil Massella.
 No affiliation with any coding-agent vendor.
 
-Repository (intended): https://github.com/neilalec/agent-town-hall.
+Repository: https://github.com/neilalec/agent-town-hall.
 The CLI/import/config identifiers remain `agent-chat`, `agent_chat` and
 `AGENT_CHAT_DB`; the user-data directory remains `agent-chat` for compatibility.

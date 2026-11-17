@@ -14,10 +14,10 @@ independent AI coding agents. No server, model API, MCP or orchestration require
 
 ## Quick start
 
-After this package has been published:
+Install the attached GitHub wheel (PyPI publication is pending):
 
 ```text
-python -m pip install agent-town-hall
+python -m pip install https://github.com/neilalec/agent-town-hall/releases/download/v0.1.0/agent_town_hall-0.1.0-py3-none-any.whl
 agent-chat init
 agent-chat --agent builder send --to reviewer --body "Please review abc1234."
 agent-chat --agent reviewer unread
@@ -34,6 +34,13 @@ Agents must actively check messages; they are not automatically awakened. Identi
 is self-declared, without authentication or encryption. Use a trusted local disk and
 do not store secrets. This is an initial release, not a multi-machine chat service.
 
-Local verification: 33 automated tests and clean-wheel installation on Windows
-Python 3.12. Cross-platform CI is configured; report its actual results when publishing.
+Local verification: 36 automated tests and clean-wheel installation on Windows
+Python 3.12. Publication requires all nine Windows/macOS/Linux CI jobs to pass on the tagged
+commit; the published release notes include the actual verification link.
 MIT licensed. Copyright (c) 2026 Neil Massella.
+
+## Polling and packaging fixes
+
+Early timed-wait returns no longer trigger extra inbox queries near a watch timeout.
+The original polling bound remains enforced, with new deterministic early-wake,
+oversleep and zero-timeout tests. Package licensing uses modern SPDX MIT metadata.

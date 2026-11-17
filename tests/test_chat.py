@@ -28,7 +28,7 @@ class MessagingTests(unittest.TestCase):
         self.tmp.cleanup()
 
     def test_unicode_markdown_and_persistence(self):
-        body = '# Example\n\n`C:\\Example Data\\tile.img` — abc1234\n\n* measured → exact *\n'
+        body = '# Example\n\n`C:\\Example Data\\tile.img` â€” abc1234\n\n* measured â†’ exact *\n'
         m = chat.post(self.db, 'codex', 'claude', 'Example', body)
         other = chat.connect(self.path)
         try:
@@ -62,6 +62,43 @@ class MessagingTests(unittest.TestCase):
         with patch.object(chat, 'receive', wraps=chat.receive) as receive:
             self.assertEqual(chat.watch(self.db, 'claude', .22, .1), [])
             self.assertLessEqual(receive.call_count, 4)
+
+    def test_watch_early_wakes_do_not_trigger_extra_queries(self):
+        clock = [0.0]
+        polls = []
+        def empty(*args, **kwargs):
+            polls.append(clock[0])
+            return []
+        def early_wait(delay):
+            self.assertFalse(self.db.in_transaction)
+            self.assertGreaterEqual(delay, .001)
+            clock[0] += delay - .0005  # model an early OS timed-wait return
+        with patch.object(chat.time, 'monotonic', side_effect=lambda: clock[0]), \
+             patch.object(chat, 'receive', side_effect=empty), \
+             patch.object(chat.threading, 'Event') as event:
+            event.return_value.wait.side_effect = early_wait
+            self.assertEqual(chat.watch(self.db, 'claude', .22, .1), [])
+        self.assertEqual(len(polls), 3)
+        self.assertTrue(all(b-a >= .1-1e-12 for a,b in zip(polls,polls[1:])))
+        self.assertTrue(all(at < .22 for at in polls))
+        self.assertGreaterEqual(clock[0], .22)
+        self.assertLess(clock[0], .222)
+
+    def test_watch_oversleep_does_not_query_after_deadline(self):
+        clock = [0.0]
+        with patch.object(chat.time, 'monotonic', side_effect=lambda: clock[0]), \
+             patch.object(chat, 'receive', return_value=[]) as receive, \
+             patch.object(chat.threading, 'Event') as event:
+            event.return_value.wait.side_effect = lambda delay: clock.__setitem__(0, 1.0)
+            self.assertEqual(chat.watch(self.db, 'claude', .22, .1), [])
+            self.assertEqual(receive.call_count, 1)
+
+    def test_watch_zero_timeout_still_checks_inbox_once(self):
+        with patch.object(chat, 'receive', return_value=[]) as receive, \
+             patch.object(chat.threading, 'Event') as event:
+            self.assertEqual(chat.watch(self.db, 'claude', 0, .1), [])
+            self.assertEqual(receive.call_count, 1)
+            event.return_value.wait.assert_not_called()
 
     def test_reply_thread_and_participants(self):
         a = chat.post(self.db, 'codex', 'claude', 'question', 'question')

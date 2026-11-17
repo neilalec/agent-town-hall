@@ -6,8 +6,9 @@ Confirmed identity:
 - Version: `0.1.0`; license: MIT
 - Copyright (c) 2026 Neil Massella
 
-This is a local, publication-ready candidate, not a published package. No remote
-repository, remote tag or upload is authorized yet.
+GitHub source publication and the v0.1.0 GitHub release are owner-approved.
+The public repository exists and private vulnerability reporting is enabled.
+**PyPI publication is not approved yet.** No automatic publishing workflow exists.
 
 ## Availability
 
@@ -16,20 +17,22 @@ as the owner returned 404 for the target repository. PyPI project JSON and simpl
 index returned 404. No conflict was found, but availability is not a reservation
 and must be rechecked immediately before publication.
 
-## Remaining publication gates
+## GitHub release gates
 
-1. Obtain the owner's explicit approval to create the remote and push the reviewed source.
-2. Recheck names, create the approved GitHub repository, and run the configured
-   Windows/macOS/Linux Python 3.10/3.12/3.14 CI matrix. Native macOS/Linux execution
-   remains unverified locally; do not present the configured matrix as a passing run.
-3. Enable GitHub private vulnerability reporting in repository Settings -> Advanced
-   Security, and verify the private form before announcing it. SECURITY.md documents
-   the intended channel; it does not claim enablement. No email address is invented.
-4. Rebuild reviewed wheel/sdist, inspect source/artifacts for private data, and verify
-   package name, entry point, author, license and repository metadata.
-5. With explicit publishing approval, create release/tag v0.1.0 using
-   GITHUB_RELEASE_v0.1.0.md and upload the reviewed artifacts to PyPI. No automatic
-   publication workflow is installed. Local checks do not reserve a package name.
+1. Run every Windows/macOS/Linux Python 3.10/3.12/3.14 job on the final commit.
+   Inspect actual results and fix failures; do not weaken checks to make them green.
+2. Rebuild reviewed wheel/sdist from that clean commit. Verify metadata, privacy,
+   contents and SHA-256 sums. Test the wheel in a clean environment.
+3. Point v0.1.0 at that exact tested commit. The old unpublished local candidate tag
+   may be moved; never rewrite a published tag. Publish the approved GitHub release
+   using GITHUB_RELEASE_v0.1.0.md and verified artifacts only after all checks pass.
+4. Verify public source, license, release assets and private reporting enablement.
+
+## PyPI is a separate step
+
+Recheck name availability, obtain explicit upload approval, and publish only after
+GitHub CI/release verification. Never imply that GitHub publication also publishes
+a package on PyPI.
 
 Local verification: RELEASE_VALIDATION.md. Existing private installations and
 inboxes are outside this project and must not be used as release fixtures.

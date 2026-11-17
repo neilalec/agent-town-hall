@@ -20,7 +20,10 @@ class PortabilityTests(unittest.TestCase):
         self.assertEqual(dist.version,'0.1.0')
         self.assertEqual(dist.metadata['Name'],'agent-town-hall')
         self.assertEqual(dist.metadata['Author'],'Neil Massella')
-        self.assertIn('Copyright (c) 2026 Neil Massella',dist.metadata['License'])
+        self.assertEqual(dist.metadata['License-Expression'],'MIT')
+        self.assertIn('LICENSE',dist.metadata.get_all('License-File'))
+        license_file=next(f for f in dist.files if str(f).endswith('/licenses/LICENSE'))
+        self.assertIn('Copyright (c) 2026 Neil Massella',dist.locate_file(license_file).read_text())
         self.assertIn('Repository, https://github.com/neilalec/agent-town-hall',dist.metadata.get_all('Project-URL'))
         self.assertTrue(any(e.name=='agent-chat' and e.value=='agent_chat.cli:main' for e in dist.entry_points))
 
