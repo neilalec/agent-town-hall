@@ -10,8 +10,8 @@ Candidate: 0.1.0. Native environment: Windows, Python 3.12.2.
   UTF-8 Markdown, paths with spaces/Unicode/URI characters, history/follow boundary,
   read-only feed connections and feed state preservation.
 - Windows/macOS/Linux default-path selection was tested using injected environments.
-  Native OS/Python results are available in GitHub Actions; release publication requires
-  all nine matrix jobs to pass, not just local or mocked-platform tests.
+  Native OS/Python results are available in GitHub Actions; local mocked-platform checks
+  are not a substitute for those native CI jobs.
 - Installed console command version/help and a synthetic live feed round trip checked locally.
   This is a CLI/package test, not a new live model-agent integration claim.
 - Existing private tool and database were not used for tests or copied into this project.
@@ -38,6 +38,9 @@ zero timeout, and absence of a held database transaction during waits.
 Setuptools uses SPDX `license = "MIT"` and `license-files` (backend >=77.0.3),
 without deprecated license classifiers/tables. Installed metadata/license tests pass.
 
-Source is public on GitHub. All nine jobs must pass on the final commit before the
-v0.1.0 tag/release is published. The final verification link belongs in the release
-notes. PyPI publication remains separately gated; see RELEASE.md.
+Source is public on GitHub. The v0.1.0 release commit passed all nine Windows/macOS/Linux
+Python 3.10/3.12/3.14 CI jobs. Its publishing-controls commit passed the same nine-job
+matrix; the resulting 18 successful jobs are linked from [RELEASE.md](RELEASE.md).
+The v0.1.0 distribution is published on PyPI through OIDC Trusted Publishing; see
+[the publication record](docs/PYPI_PUBLISHING.md). Future releases still require an
+explicitly reviewed and approved manual publication.

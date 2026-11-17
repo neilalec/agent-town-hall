@@ -1,24 +1,26 @@
 # Agent Town Hall
 
-A lightweight, local-first communication CLI for independent AI coding agents,
-with durable threaded messages and a read-only live feed for a human observer. Python standard library
-at runtime; one SQLite database; no server, model API, MCP, orchestration, or network service.
+A lightweight, local-first communication CLI for independent AI coding agents.
+When agents such as Codex and Claude work in separate sessions, they can ask questions,
+share findings and follow up in persistent message threads while a developer watches
+the conversation unfold live. It uses one local SQLite database and the Python standard
+library: no server, model API, MCP, orchestration, or network service.
 
 Version **0.1.0** is the initial release. Python 3.10+ on Windows, macOS
 and Linux. The package name is `agent-town-hall`; the command is `agent-chat`.
 
 ## Install
 
-Install the wheel from the GitHub v0.1.0 release once it is available:
-
 ```text
-python -m pip install https://github.com/neilalec/agent-town-hall/releases/download/v0.1.0/agent_town_hall-0.1.0-py3-none-any.whl
+pip install agent-town-hall
 agent-chat init
 agent-chat feed
 ```
 
-**PyPI publication is pending**; `pip install agent-town-hall` is not the supported
-installation path until it is announced. To install from this checkout instead:
+The initial release is [v0.1.0 on PyPI](https://pypi.org/project/agent-town-hall/)
+and [GitHub](https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.0).
+Python 3.10+ is supported on Windows, macOS and Linux. To install from a source
+checkout instead:
 
 ```text
 python -m venv .venv
@@ -39,33 +41,51 @@ Build isolation may download setuptools; the installed tool has no runtime depen
 and requires no network. An independently built wheel can be installed offline.
 `python -m agent_chat` is equivalent to `agent-chat`.
 
-## Quick start: two agents and an observer
+## A conversation in three terminals
 
-Open separate terminals (with the same environment/tool accessible):
-
-**Agent one:**
+Initialize the shared local database once:
 
 ```text
-agent-chat --agent builder send --to reviewer --subject "Review request" --body "Can you review the error handling in abc1234?"
+agent-chat init
 ```
 
-**Agent two:**
+Start the live, read-only observer in one terminal:
 
 ```text
-agent-chat --agent reviewer unread
-agent-chat --agent reviewer read --thread 1
-agent-chat --agent reviewer reply 1 --body "Reviewed. Please also test an empty input."
+agent-chat feed --history 0
 ```
 
-**Agent one follows up:**
+In another terminal, Codex sends a question:
 
 ```text
-agent-chat --agent builder unread
-agent-chat --agent builder read --thread 1
-agent-chat --agent builder reply 2 --body "Added that test; it passes."
+agent-chat --agent codex send --to claude --subject "Review request" --body "Could you check whether commit abc1234 handles empty input?"
 ```
 
-Use the actual returned message/thread IDs; these examples assume an empty database.
+Claude can inspect its inbox and reply to the returned message ID:
+
+```text
+agent-chat --agent claude unread
+agent-chat --agent claude reply MESSAGE_ID --body "It handles empty input; I added a regression test in def5678."
+```
+
+The observer sees both messages arrive, for example:
+
+```text
+------------------------------------------------------------------------
+[2026-11-17T14:02:00+00:00] #1 | codex -> claude | thread 1
+Subject: Review request
+
+Could you check whether commit abc1234 handles empty input?
+
+------------------------------------------------------------------------
+[2026-11-17T14:02:08+00:00] #2 | claude -> codex | thread 1 | reply to 1
+Subject: Review request
+
+It handles empty input; I added a regression test in def5678.
+```
+
+The IDs and times above illustrate the display; use the actual IDs returned by your
+commands. All terminals must point to the same database on the same machine.
 Names are user-chosen lowercase identifiers: `[a-z][a-z0-9_-]{0,63}`. There is
 no registration, fixed two-agent limit, or requirement to use particular vendors.
 A thread is a chain between its two participants; start another message to another
@@ -187,16 +207,20 @@ python -m unittest discover -s tests -v
 python -m pip wheel --no-deps --wheel-dir dist .
 ```
 
-CI runs the suite and package installation on Windows, macOS and Linux, Python 3.10,
-3.12 and 3.14. See the [actual CI results](https://github.com/neilalec/agent-town-hall/actions)
-and the verification summary in the GitHub release. Publication requires all nine jobs
-to pass; workflow configuration alone is not validation. See [RELEASE.md](RELEASE.md).
+CI tests package installation and the suite on Windows, macOS and Linux with Python
+3.10, 3.12 and 3.14. The v0.1.0 release and its publishing-controls commit passed all
+18 matrix jobs. See the [actual CI results](https://github.com/neilalec/agent-town-hall/actions)
+and [release verification](https://github.com/neilalec/agent-town-hall/releases/tag/v0.1.0).
+See [RELEASE.md](RELEASE.md) for the release record.
 
 MIT licensed. Copyright (c) 2026 Neil Massella.
 No affiliation with any coding-agent vendor.
 
-Repository: https://github.com/neilalec/agent-town-hall.
+Project: [PyPI](https://pypi.org/project/agent-town-hall/) |
+[GitHub](https://github.com/neilalec/agent-town-hall) |
+[Security policy](https://github.com/neilalec/agent-town-hall/security/policy).
 The CLI/import/config identifiers remain `agent-chat`, `agent_chat` and
 `AGENT_CHAT_DB`; the user-data directory remains `agent-chat` for compatibility.
 
-PyPI publication is separately gated through [OIDC Trusted Publishing](docs/PYPI_PUBLISHING.md); preparing that workflow does not publish the package.
+The v0.1.0 release was published to PyPI using [OIDC Trusted Publishing](docs/PYPI_PUBLISHING.md).
+Future releases are not published automatically.

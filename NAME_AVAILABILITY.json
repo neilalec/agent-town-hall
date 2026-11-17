@@ -12,5 +12,11 @@
     "simple_index_http_status": 404,
     "result": "No project found; registration not attempted"
   },
-  "caveat": "No conflict observed; availability is not reserved or guaranteed until approved creation/registration."
+  "caveat": "This is a historical pre-publication snapshot. Its 404 responses predate creation and are not the current project status.",
+  "subsequent_status": {
+    "checked_at_utc": "2026-11-17",
+    "pypi_project_url": "https://pypi.org/project/agent-town-hall/",
+    "published_version": "0.1.0",
+    "note": "The project was created and v0.1.0 was published after the checks above."
+  }
 }
